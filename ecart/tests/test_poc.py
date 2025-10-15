@@ -1,6 +1,9 @@
 import time
+
+import pytest
 from playwright.sync_api import Page, expect, Playwright
 from utils.base_utils import APIUtils
+
 
 
 # Note: by default playwright will launch in headless mode
@@ -141,21 +144,22 @@ def test_table(page:Page):
 
 """API + UI Test: Login to UI application Make API call place an order get the order ID and verify that order on UI
 #userame=demo@playwright.com && Password=Qwe@1234"""
-def test_end_to_end(playwright: Playwright):
+# @pytest.mark.parametrize('fetch_test_data', fetch_test_data)
+def test_end_to_end(playwright: Playwright, fetch_test_data):
     browser = playwright.chromium.launch(headless=False)
     context = browser.new_context()
     page = context.new_page()
     page.goto('https://rahulshettyacademy.com/client')
     expect(page).to_have_title("Let's Shop")  # assert the page title
-    # page.get_by_text('Register here').click()
-    # expect(page.get_by_role('button', name='Register')).to_be_visible()  #assert if landed on Register Page
-    page.locator('#userEmail').fill('demo@playwright.com')
-    page.locator('#userPassword').fill('Qwe@1234')
-    page.get_by_role('button', name='login').click()
-    expect(page.get_by_text('Home |')).to_have_count(2)
-    time.sleep(3)
-    api_utils = APIUtils()
-    api_utils.create_order(playwright)
+    print(fetch_test_data)
+
+    # page.locator('#userEmail').fill(fetch_test_data['user'])
+    # page.locator('#userPassword').fill(fetch_test_data['password'])
+    # page.get_by_role('button', name='login').click()
+    # expect(page.get_by_text('Home |')).to_have_count(2)
+    # time.sleep(3)
+    # api_utils = APIUtils()
+    # api_utils.create_order(playwright)
 
 
 

@@ -14,3 +14,12 @@
 5. pip install -r requirements.txt
 6. to install all the browsers that playwright supports 
    playwright install
+
+
+## Best Practices 
+1. Avoid hard code test data
+2. Externalize Test data
+3. Implement POM
+4. Centralize reusable code
+5. Define global environment variable
+6. 
