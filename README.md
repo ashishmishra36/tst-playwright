@@ -4,17 +4,48 @@
         cd tst-playwright
 2. create a virtual environment
         python -m venv .venv
-3. Activate virtual environment
-        source .venv/bin/activate(macOS/Linux (bash/zsh))
+3. Activate a virtual environment
+        source .venv/bin/activate (macOS/Linux (bash/zsh))
         .venv\Scripts\Activate.ps1(Windows - PowerShell)
         .venv\Scripts\activate.bat(Windows)
-        source .venv/Scripts/activate(git bash)
+        source .venv/Scripts/activate (git bash)
 4. Upgrade pip(recommended)
         python -m pip install --upgrade pip
-5. pip install -r requirements.txt
+5. Execute pip install -r requirements.txt
 6. to install all the browsers that playwright supports 
    playwright install
 
+
+## Running Tests
+
+To run all tests:
+    
+    bash pytest
+
+To run tests in a specific file:
+
+    bash pytest ecart/tests/test_home.py
+
+To run tests with a specific marker (if configured):
+    
+    bash pytest -m "smoke"
+
+To run tests in headed mode (to see the browser):
+
+    bash pytest --headed
+
+To run tests in a specific browser (e.g., firefox):
+    
+    bash pytest --browser firefox
+
+## Project Structure
+
+- `ecart/configs`: Configuration files.
+- `ecart/pages`: Page Object Models (POM).
+- `ecart/test_data`: Test data files.
+- `ecart/tests`: Test scripts.
+- `ecart/utils`: Utility functions.
+- `requirements.txt`: Python dependencies.
 
 ## Best Practices 
 1. Avoid hard code test data
