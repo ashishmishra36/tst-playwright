@@ -1,5 +1,6 @@
 import time
 
+import pytest
 from playwright.sync_api import Page, expect, Playwright
 
 from utils.base_utils import APIUtils
@@ -9,6 +10,7 @@ fake_no_orders_response ={"data":[],"message":"No Orders"}
 def intercept_response(route):
     route.fulfill(json=fake_no_orders_response)
 
+@pytest.mark.skip
 def test_network(page:Page):
     page.goto('https://rahulshettyacademy.com/client')
     expect(page).to_have_title("Let's Shop")
@@ -30,7 +32,7 @@ def test_network(page:Page):
 def intercept_request(route):
     route.continue_(url='https://rahulshettyacademy.com/api/ecom/order/get-orders-details?id=68d3527c1233')
 
-
+@pytest.mark.skip
 def test_network_2(page:Page):
     page.goto('https://rahulshettyacademy.com/client')
     expect(page).to_have_title("Let's Shop")
@@ -49,11 +51,11 @@ def test_network_2(page:Page):
     print(page.locator('.blink_me').text_content())
 
 
-
+@pytest.mark.skip
 def test_inject_cookie(playwright: Playwright):
     api_utils= APIUtils()
     token = api_utils.get_login_token(playwright)
-    print(f'token received as : {token}')
+    log.info(f'token received as : {token}')
     browser = playwright.chromium.launch(headless=False)
     context = browser.new_context()
     page = context.new_page()

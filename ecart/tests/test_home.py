@@ -1,21 +1,24 @@
-import re
-from playwright.sync_api import Page, expect
-from configs.config import TestData
 from tests.test_base import BaseTest
+from pages.home_page import HomePage
+from configs.config import TestData
+from playwright.sync_api import expect
+from utils.logger import get_logger
 
 
 class TestHome(BaseTest):
-    def test_has_title(page: Page):
-        page.goto(TestData.BASE_URL)
+    log = get_logger(__name__)
 
-        # Expect a title "to contain" a substring.
-        expect(page).to_have_title(re.compile("Playwright"))
+    def test_has_title(self, page):
+        home = HomePage(page)
 
-    def test_get_started_link(page: Page):
-        page.goto(TestData.BASE_URL)
+        home.navigate_to_home(TestData.BASE_URL)
+        self.log.info(f"Page title: {home.get_home_title()}")
+        expect(page).to_have_title("Automation Exercise")
 
-        # Click the get started link.
-        page.get_by_role("link", name="Get started").click()
+    def test_get_started_link(self, page):
+        home = HomePage(page)
 
-        # Expects page to have a heading with the name of Installation.
-        expect(page.get_by_role("heading", name="Installation")).to_be_visible()
+        home.navigate_to_home(TestData.BASE_URL)
+        home.click_login_link()
+        self.log.info("Login link clicked")
+        expect(home.get_login_heading()).to_be_visible()

@@ -1,5 +1,5 @@
 import pytest
 
-@pytest.mark.usefixtures("init_setup")
+@pytest.mark.usefixtures("page")
 class BaseTest:
     pass
