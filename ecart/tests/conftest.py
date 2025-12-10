@@ -1,8 +1,10 @@
 import json
 import pytest
 from playwright.sync_api import sync_playwright
-
 from utils.logger import get_logger
+
+
+log = get_logger(__name__)
 
 
 def pytest_addoption(parser):
@@ -12,6 +14,7 @@ def pytest_addoption(parser):
 def page(request):
     browser_name = request.config.getoption("--app-browser")
     with sync_playwright() as p:
+        log.info(f"Launching {browser_name} browser")
         browser_type = getattr(p, browser_name)
         browser = browser_type.launch(headless=False)
         context = browser.new_context()

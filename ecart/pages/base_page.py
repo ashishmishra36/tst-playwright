@@ -6,6 +6,7 @@ class BasePage:
 
     def __init__(self, page: Page):
         self.page = page
+        # gets the name of the class (here, "BasePage" or the child class name when inherited).
         self.log = get_logger(self.__class__.__name__)
 
     # ---------------------------
